@@ -1,7 +1,9 @@
 package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -12,6 +14,7 @@ import java.util.List;
 @Table(name = "orders")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
     @Id
     @GeneratedValue
@@ -69,11 +72,18 @@ public class Order {
         if (this.delivery.getStatus() == DeliveryStatus.COMP) {
             throw new IllegalStateException("이미 배송완료된 상품은 주문취소가 불가능합니다.");
         }
+
         // 주문이 완료되지 않았으면 주문상태 취소
         this.setStatus(OrderStatus.CANCEL);
         // orderItem 값들을 모두 하나씩 취소해야함
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
+    }
+
+    // == 전체 주문 가격 조회
+    public int getTotalPrice() {
+        int totalPrice = orderItems.stream().mapToInt(OrderItem::getTotalPrice).sum();
+        return totalPrice;
     }
 }
