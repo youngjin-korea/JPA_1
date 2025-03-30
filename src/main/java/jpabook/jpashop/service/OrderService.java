@@ -45,7 +45,9 @@ public class OrderService {
         return order.getId();
     }
 
-    // 취소
+    /**
+     * 취소
+     */
     public void cancelOrder(Long orderId) {
         // 주문 조회
         Order order = orderRepository.findOne(orderId);
@@ -54,6 +56,8 @@ public class OrderService {
         order.cancel();
     }
 
-    // 검색
+    /**
+    * 검색
+     */
 
 }
