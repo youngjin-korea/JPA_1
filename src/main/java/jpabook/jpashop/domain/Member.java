@@ -1,6 +1,8 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -17,11 +19,13 @@ public class Member {
     private Long id;
 
     @Column(unique = true)
+    @NotNull
     private String name;
 
     @Embedded
     private Address address;
 
+    //@JsonIgnore
     @Builder.Default
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();

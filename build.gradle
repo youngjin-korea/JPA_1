@@ -34,6 +34,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	// 유효성 검사
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 //	 org.hibernate.orm.jdbc.bind: trace를 application.yml에 추가해 주면서 쿼리문에 값을 확인가능
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
 }
